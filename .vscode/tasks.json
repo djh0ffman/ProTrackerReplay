@@ -1,0 +1,36 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "asm-main",
+			"type": "shell",
+			"command": "vasmm68k_mot",
+			"args": [
+				"main.asm",
+				"-o",
+				"build\\main.o",
+				"-m68000",
+				"-Fhunk",
+				"-linedebug",
+				"-ignore-mult-inc",
+				"-nowarn=2047",
+				"-nowarn=2069"
+			],
+			"group": "build"
+		},
+		{
+			"label": "build-main",
+			"type": "shell",
+			"command": "vlink",
+			"args": [
+				"build\\main.o",
+				"-ouae\\dh0\\main",
+				"-bamigahunk",
+				"-Bstatic"
+			],
+			"group": "build",
+			"dependsOn": "asm-main",
+			"problemMatcher": []
+		},
+	]
+}
